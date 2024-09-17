@@ -16,4 +16,25 @@ dessert = spark.read.csv(r"dessert.csv",
 
 #################################################
 
+dessert.show(5)
+dessert.printSchema()
+
 print(dessert.where(dessert.purchase).count())
+
+print(dessert.filter(dessert.purchase).count())
+
+'''
+How many groups purchased a dessert on Mondays?
+'''
+(print(dessert.filter((dessert.purchase) & (dessert.weekday == "Monday") ).count()))
+
+'''
+How many visitors purchased a dessert?
+What is the average table?
+'''
+
+dessert\
+    .where(dessert.purchase)\
+    .agg({'num_of_guests': 'sum', 'table': 'mean'})\
+    .show()
+
