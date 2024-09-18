@@ -14,7 +14,7 @@ def get_dates_df():
 
 spark = SparkSession.builder.master("local[*]").appName('ex3_add_dates').getOrCreate()
 
-flights_df = spark.read.parquet('hdfs://course-hdfs:8020/data/stg/flight_matched/')
+flights_df = spark.read.parquet('s3a://spark/data/stg/flight_matched/')
 dates_df = get_dates_df()
 
 dates_full_df = dates_df \
@@ -27,6 +27,6 @@ max_date_df = dates_full_df \
 
 enriched_flights_df = flights_df.join(max_date_df, ['day_of_week', 'day_of_month'])
 
-enriched_flights_df.write.parquet('hdfs://course-hdfs:8020/data/transformed/flights/', mode='overwrite')
+enriched_flights_df.write.parquet('s3a://spark/data/transformed/flights/',mode='overwrite')
 
 spark.stop()
