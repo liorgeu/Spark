@@ -91,6 +91,13 @@ taxiTripsDF = taxiTripsDF\
             .start()\
             .awaitTermination()
 
+socketDF = socketDF\
+    .writeStream\
+            .format("console")\
+            .outputMode("append")\
+            .start()\
+            .awaitTermination()
+
 
 # s3_query = taxiTripsDF\
 #     .writeStream\
