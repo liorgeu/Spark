@@ -29,6 +29,6 @@ selected_df = joined_df \
             F.col('Current Ver').alias('version')) \
     .fillna(-1, 'reviews')
 
-selected_df.write.parquet('hdfs://course-hdfs:8020/data/source/google_apps', mode='overwrite')
+selected_df.write.parquet('s3a://spark/data/source/google_apps', mode='overwrite')
 
 spark.stop()

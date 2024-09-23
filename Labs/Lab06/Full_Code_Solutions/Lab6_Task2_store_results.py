@@ -44,8 +44,8 @@ query = parsed_df \
     .trigger(processingTime='1 minute') \
     .format('parquet') \
     .outputMode('append') \
-    .option("path", "hdfs://course-hdfs:8020/data/target/google_reviews_calc") \
-    .option('checkpointLocation', 'hdfs://course-hdfs:8020/checkpoints/ex6/store_result') \
+    .option("path", "s3a://spark/data/target/google_reviews_calc") \
+    .option('checkpointLocation', 's3a://spark/checkpoints/ex6/store_result') \
     .start()
 
 query.awaitTermination()

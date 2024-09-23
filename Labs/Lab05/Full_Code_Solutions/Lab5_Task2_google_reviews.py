@@ -21,6 +21,6 @@ selected_df = joined_df \
             F.col('Sentiment_Polarity').cast(T.FloatType()).alias('sentiment_polarity'),
             F.col('Sentiment_Subjectivity').cast(T.FloatType()).alias('sentiment_subjectivity'))
 
-selected_df.write.parquet('hdfs://course-hdfs:8020/data/source/google_reviews', mode='overwrite')
+selected_df.write.parquet('s3a://spark/data/source/google_reviews', mode='overwrite')
 
 spark.stop()

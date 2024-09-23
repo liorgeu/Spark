@@ -29,7 +29,7 @@ parsed_df = stream_df \
     .withColumn('parsed_json', F.from_json(F.col('value'), json_schema)) \
     .select(F.col('parsed_json.*'))
 
-static_data_df = spark.read.parquet('hdfs://course-hdfs:8020/data/source/google_apps/')
+static_data_df = spark.read.parquet('s3a://spark/data/source/google_apps/')
 
 static_data_df.cache()
 
@@ -54,7 +54,7 @@ query = json_df \
     .format('kafka') \
     .option("kafka.bootstrap.servers", "course-kafka:9092") \
     .option("topic", "gps-with-reviews") \
-    .option('checkpointLocation', 'hdfs://course-hdfs:8020/checkpoints/ex6/review_calculation') \
+    .option('checkpointLocation', 's3a://spark/checkpoints/ex6/review_calculation') \
     .outputMode('update') \
     .start()
 

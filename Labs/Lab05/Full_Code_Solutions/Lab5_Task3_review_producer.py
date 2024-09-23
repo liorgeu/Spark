@@ -6,7 +6,7 @@ from kafka import KafkaProducer
 
 spark = SparkSession.builder.master("local[*]").appName('ex5_reviews_producer').getOrCreate()
 
-data_df = spark.read.parquet('hdfs://course-hdfs:8020/data/source/google_reviews')
+data_df = spark.read.parquet('s3a://spark/data/source/google_reviews')
 
 data = data_df.toJSON()
 
